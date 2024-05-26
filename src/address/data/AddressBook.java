@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 public class AddressBook {
     Scanner input = new Scanner(System.in);
+
     ArrayList <AddressEntry> AddressEntryRegister = new ArrayList<>();
 
+    //Method for add new records through user data insertion
     public void add () {
         AddressEntry temporalAddressEntry = new AddressEntry();
         System.out.println("Name");
@@ -30,9 +32,24 @@ public class AddressBook {
         AddressEntryRegister.add(temporalAddressEntry);
     }
 
-    public void print(){
+    //Method to remove records from the directory
+    public void remove(String lastName){
+        AddressEntryRegister.removeIf(entry -> entry.getLastName().equals(lastName));
+    }
+
+    //Method to reading records through a text file
+    public void readFromFile(String fileName){
+
 
     }
+
+
+    //Method to search for a record in the directory by the last name
+    public void find(String lastName){
+
+    }
+
+
 
 
 }
