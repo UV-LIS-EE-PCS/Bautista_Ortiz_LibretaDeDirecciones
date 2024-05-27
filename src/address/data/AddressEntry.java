@@ -90,4 +90,5 @@ public class AddressEntry {
                 "Email: " + getEmail() + "\n"+ "PhoneNumber: " + getPhoneNumber();
 
     }
+
 }
