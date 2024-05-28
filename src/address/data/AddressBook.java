@@ -1,6 +1,7 @@
 package address.data;
 
 import java.io.*;
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -54,6 +55,7 @@ public class AddressBook {
     //Method to remove records from the directory
     public void remove(String lastName){
         addressEntriesList.removeIf(entry -> entry.getLastName().equals(lastName));
+        System.out.println(lastName + "Removed successfully");
     }
 
     //Method to saving an entry to a file
@@ -91,23 +93,50 @@ public class AddressBook {
                 addressElements[index] = position[0];
                 index++;
             }
-            AddressEntry temporalEntry = createAddressEntry(addressElements);
-            addressEntriesList.add(temporalEntry);
+            AddressEntry dataEntry = createAddressEntry(addressElements);
+            addressEntriesList.add(dataEntry);
             System.out.println("File: " + fileName + "load successfully");
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-
     //Method to search for a record in the directory by the last name
     public void find(String lastName){
+        ArrayList <AddressEntry> addressEntriesFound = new ArrayList<>();
+
         for (int i = 0; i< addressEntriesList.size(); i++){
-            if (addressEntriesList.get(i).getLastName().equals(lastName)){
+            AddressEntry temporalEntry = addressEntriesList.get(i);
+            if (temporalEntry.getName().toUpperCase().contains(lastName.toUpperCase())){
                 System.out.println(addressEntriesList.toString());
+                addressEntriesFound.add(temporalEntry);
+            }
+        }
+        if (addressEntriesFound.isEmpty()) {
+            System.out.println("No address entry found");
+        }
+        else {
+            for (int i = 0; i < addressEntriesFound.size(); i++){
+                System.out.println(addressEntriesFound.get(i).toString());
             }
         }
     }
+
+    //Method to display all entries contained in the ArrayList
+    public void displayEntries(){
+        if (addressEntriesList.isEmpty()){
+            System.out.println("The directory is empty,please add a new record an try again");
+        }
+        else {
+            Comparator <AddressEntry> comparator = Comparator.comparing(AddressEntry::getLastName);
+            addressEntriesList.sort(comparator);
+            for(AddressEntry temporalEntry : addressEntriesList){
+                System.out.println(temporalEntry.toString());
+            }
+        }
+    }
+
+
 
 
 
