@@ -8,13 +8,13 @@ public class AddressEntry {
     private String state;
     private int zip;
     private String email;
-    private int phoneNumber;
+    private String phoneNumber;
 
     public AddressEntry(){
 
     }
     public AddressEntry(String name, String lastName, String street, String city, String state, int zip,
-                        String email, int phoneNumber){
+                        String email, String phoneNumber){
 
     }
 
@@ -74,11 +74,11 @@ public class AddressEntry {
         this.email = email;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
