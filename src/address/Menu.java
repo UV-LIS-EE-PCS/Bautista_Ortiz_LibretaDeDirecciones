@@ -17,8 +17,8 @@ public class Menu {
         System.out.println("a) Add a new address");
         System.out.println("b) Remove an address");
         System.out.println("c) Read from file");
-        System.out.println("d) Find an address by last name");
-        System.out.println("e) Show all the address");
+        System.out.println("d) Show all the address");
+        System.out.println("e) Find an address by last name");
         System.out.println("f) Exit");
         System.out.println("------------------------------------");
     }

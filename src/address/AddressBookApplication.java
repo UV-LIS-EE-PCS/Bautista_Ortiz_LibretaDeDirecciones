@@ -53,7 +53,7 @@ public class AddressBookApplication {
                 case 'b': //Remove
                     System.out.println("Enter the name of the contact of you want to remove");
                     String nameContact = input.nextLine();
-                    System.out.println("Are you sure to remove this contact? ");
+                    System.out.println("Are you sure to remove this contact? (y/n)");
                     char answerToCase = input.nextLine().toLowerCase().charAt(0);
                     if (answerToCase == 'y'){
                         addressEntriesList.remove(nameContact);
@@ -77,6 +77,7 @@ public class AddressBookApplication {
                     System.out.println("Enter the last name ");
                     String findLastName = input.nextLine();
                     addressEntriesList.find(findLastName);
+                    break;
 
                 case 'f': //Exit
                     System.out.println("Thank you for use the directory");
@@ -85,6 +86,7 @@ public class AddressBookApplication {
 
                 default:
                     System.out.println("Invalid entry, must be a letter from a - e");
+                    break;
 
 
 

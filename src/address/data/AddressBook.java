@@ -88,9 +88,9 @@ public class AddressBook {
         ArrayList <AddressEntry> addressEntriesFound = new ArrayList<>();
 
         for (int i = 0; i< addressEntriesList.size(); i++){
-            AddressEntry temporalEntry = addressEntriesList.get(i);
-            if (temporalEntry.getName().toUpperCase().contains(lastName.toUpperCase())){
-                System.out.println(addressEntriesList.toString());
+            AddressEntry temporalEntry;
+            temporalEntry = addressEntriesList.get(i);
+            if (temporalEntry.getLastName().toLowerCase().contains(lastName.toLowerCase())){
                 addressEntriesFound.add(temporalEntry);
             }
         }
@@ -98,11 +98,13 @@ public class AddressBook {
             System.out.println("No address entry found");
         }
         else {
-            for (int i = 0; i < addressEntriesFound.size(); i++){
-                System.out.println(addressEntriesFound.get(i).toString());
+            for (int i = 0; i < addressEntriesFound.size(); i++) {
+                 System.out.println("Found address entry no.: " + (i + 1));
+                 System.out.println(addressEntriesFound.get(i).toString());
             }
         }
     }
+
 
     //Method to display all entries contained in the ArrayList
     public void displayEntries(){
