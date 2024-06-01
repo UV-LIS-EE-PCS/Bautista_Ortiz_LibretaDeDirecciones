@@ -1,20 +1,20 @@
 package address.data;
 
+import address.Menu;
+
 import java.io.*;
 import java.util.Comparator;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class AddressBook {
-    Scanner input = new Scanner(System.in);
 
     //Singleton pattern and declaration of the array list
+    private ArrayList <AddressEntry> addressEntriesList = new ArrayList<>();
     private static AddressBook instance = null;
-    ArrayList <AddressEntry> addressEntriesList;
+
 
     //Array List initialization
     private AddressBook(){
-        addressEntriesList = new ArrayList<>();
     }
 
     //Method to return the single instance
@@ -25,30 +25,22 @@ public class AddressBook {
         return instance;
     }
 
-
-
+    public ArrayList <AddressEntry> getEntries(){
+        return addressEntriesList;
+    }
 
     //Method for add new records through user data insertion
-    public void add () {
+    public void add (String name, String lastName, String street, String city,
+                     String state, int zip, String email, String phoneNumber) {
         AddressEntry dataEntry = new AddressEntry();
-        System.out.println("Name");
-        dataEntry.setName(input.nextLine());
-        System.out.println("Last Name");
-        dataEntry.setLastName(input.nextLine());
-        System.out.println("Street");
-        dataEntry.setStreet(input.nextLine());
-        System.out.println("City");
-        dataEntry.setCity(input.nextLine());
-        System.out.println("State");
-        dataEntry.setState(input.nextLine());
-        System.out.println("Zip");
-        dataEntry.setZip(input.nextInt());
-        input.nextLine();
-        System.out.println("Email");
-        dataEntry.setEmail(input.nextLine());
-        System.out.println("Phone Number");
-        dataEntry.setPhoneNumber(input.nextInt());
-        input.nextLine();
+        dataEntry.setName(name);
+        dataEntry.setLastName(lastName);
+        dataEntry.setStreet(street);
+        dataEntry.setCity(city);
+        dataEntry.setState(state);
+        dataEntry.setZip(zip);
+        dataEntry.setEmail(email);
+        dataEntry.setPhoneNumber(phoneNumber);
         addressEntriesList.add(dataEntry);
     }
 
@@ -56,16 +48,6 @@ public class AddressBook {
     public void remove(String lastName){
         addressEntriesList.removeIf(entry -> entry.getLastName().equals(lastName));
         System.out.println(lastName + "Removed successfully");
-    }
-
-    //Method to saving an entry to a file
-    public void saveToFile(AddressEntry dataEntry ){
-        try (FileWriter file = new FileWriter(dataEntry.getLastName() + "_"
-        + dataEntry.getName() + ".txt")){
-            file.write(dataEntry.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     //Method to create and return an instance from a String array
@@ -78,7 +60,7 @@ public class AddressBook {
         dataEntry.setState(addressElements[4]);
         dataEntry.setZip(Integer.parseInt(addressElements[5]));
         dataEntry.setEmail(addressElements[6]);
-        dataEntry.setPhoneNumber(Integer.parseInt(addressElements[7]));
+        dataEntry.setPhoneNumber(addressElements[7]);
         return dataEntry;
     }
 
