@@ -45,9 +45,10 @@ public class AddressBook {
     }
 
     //Method to remove records from the directory
-    public void remove(String lastName){
-        addressEntriesList.removeIf(entry -> entry.getLastName().equals(lastName));
-        System.out.println(lastName + "Removed successfully");
+    public void remove(String name, String lastName ){
+        addressEntriesList.removeIf(entry -> entry.getLastName().equals(lastName)
+                && entry.getName().equals(name));
+        System.out.println(lastName + " Removed successfully");
     }
 
     //Method to create and return an instance from a String array
@@ -96,6 +97,7 @@ public class AddressBook {
         }
         if (addressEntriesFound.isEmpty()) {
             System.out.println("No address entry found");
+            return;
         }
         else {
             for (int i = 0; i < addressEntriesFound.size(); i++) {
