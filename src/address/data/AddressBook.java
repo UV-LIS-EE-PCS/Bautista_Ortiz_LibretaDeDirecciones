@@ -77,7 +77,7 @@ public class AddressBook {
             }
             AddressEntry dataEntry = createAddressEntry(addressElements);
             addressEntriesList.add(dataEntry);
-            System.out.println("File: " + fileName + "load successfully");
+            System.out.println("File: " + fileName + " load successfully");
         } catch (Exception e){
             e.printStackTrace();
         }

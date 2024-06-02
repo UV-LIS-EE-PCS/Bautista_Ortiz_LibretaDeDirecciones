@@ -34,7 +34,8 @@ public class Menu {
         return false;
     }
 
-    public void CheckToAdd (String name, String lastName, String street, String city, String state, int zip, String email, String phoneNumber) {
+    public void CheckToAdd (String name, String lastName, String street, String city,
+                            String state, int zip, String email, String phoneNumber) {
         try {
             if (!isContactExists(name, lastName)) {
                 menu.add(name, lastName, street, city, state, zip, email, phoneNumber);
@@ -46,9 +47,6 @@ public class Menu {
             System.out.println("An error occurred when adding the contact: " + e.getMessage());
         }
     }
-
-
-
 
 }
 

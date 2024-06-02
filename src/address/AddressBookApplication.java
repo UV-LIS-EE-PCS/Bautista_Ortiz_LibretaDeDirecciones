@@ -3,6 +3,7 @@ package address;
 import address.data.*;
 
 import javax.xml.namespace.QName;
+import java.nio.channels.SelectableChannel;
 import java.util.Scanner;
 
 public class AddressBookApplication {
@@ -17,46 +18,57 @@ public class AddressBookApplication {
             input.nextLine();
             switch (answer) {
                 case 'a': //Add
-                    System.out.println("Name");
-                    String name = input.nextLine();
-                    System.out.println("Last Name");
-                    String lastName = input.nextLine();
-                    System.out.println("Street");
-                    String street = input.nextLine();
-                    System.out.println("City");
-                    String city = input.nextLine();
-                    System.out.println("State");
-                    String state = input.nextLine();
-                    System.out.println("Zip");
-                    while (!input.hasNextInt()) {
-                        System.out.println("Invalid input \nEnter a nex zip");
-                        input.next();
-                    }
-                    int zip = input.nextInt();
-                    input.nextLine();
-                    System.out.println("Email");
-                    String email = input.nextLine();
-                    System.out.println("Phone Number");
-                    String phoneNumber = input.nextLine();
+                    boolean validEntry = true;
+                    while (validEntry) {
+                        try {
+                            System.out.println("Name");
+                            String name = validateNonEmptyInput(input.nextLine());
+                            System.out.println("Last Name");
+                            String lastName = validateNonEmptyInput(input.nextLine());
+                            System.out.println("Street");
+                            String street = validateNonEmptyInput(input.nextLine());
+                            System.out.println("City");
+                            String city = validateNonEmptyInput(input.nextLine());
+                            System.out.println("State");
+                            String state = validateNonEmptyInput(input.nextLine());
+                            System.out.println("Zip");
+                            while (!input.hasNextInt()) {
+                                System.out.println("Invalid input \nEnter a nex zip");
+                                input.next();
+                            }
+                            int zip = input.nextInt();
+                            input.nextLine();
+                            System.out.println("Email");
+                            String email = validateNonEmptyInput(input.nextLine());
+                            System.out.println("Phone Number");
+                            String phoneNumber = validateNonEmptyInput(input.nextLine());
 
-                    if (!begin.isContactExists(name,lastName)){
-                        begin.CheckToAdd(name,lastName, street, city, state, zip, email, phoneNumber);
-                        AddressEntry dataEntry = new AddressEntry(name,lastName, street, city, state, zip,
-                                email, phoneNumber);
+                            if (!begin.isContactExists(name, lastName)) {
+                                begin.CheckToAdd(name, lastName, street, city, state, zip, email, phoneNumber);
+                                AddressEntry dataEntry = new AddressEntry(name, lastName, street, city, state, zip,
+                                        email, phoneNumber);
+                                validEntry = false;
+                            } else {
+                                System.out.println("Contact already exists");
+                            }
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                            System.out.println("Please enter a valid information");
+                        }
                     }
-                    else{
-                        System.out.println("Contact already exists");
-                    }
-
                     break;
 
                 case 'b': //Remove
-                    System.out.println("Enter the name of the contact of you want to remove");
-                    String nameContact = input.nextLine();
+                    System.out.println("Enter the last name of the contact of you want to remove");
+                    String lastNameContact = input.nextLine();
+                    addressEntriesList.find(lastNameContact);
+                    System.out.println("Select the contact you wanna remove");
+                    int index = input.nextInt();
+
                     System.out.println("Are you sure to remove this contact? (y/n)");
                     char answerToCase = input.nextLine().toLowerCase().charAt(0);
                     if (answerToCase == 'y'){
-                        addressEntriesList.remove(nameContact);
+                        addressEntriesList.remove(lastNameContact);
                     } else if (answerToCase == 'n') {
                         System.out.println("Operation canceled");
 
@@ -96,5 +108,11 @@ public class AddressBookApplication {
         }
     }
 
-
+    //Method to validate if a user input is empty
+    private static String validateNonEmptyInput(String input) {
+        if (input == null || input.trim().equals("")) {
+            throw new IllegalArgumentException("This field cannot be empty");
+        }
+        return input.trim();
+    }
 }
