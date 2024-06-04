@@ -12,7 +12,7 @@ public class AddressBookApplication {
         AddressBook addressEntriesList = AddressBook.getInstance();
         Menu begin = new Menu(addressEntriesList);
         boolean running = true;
-        while (running) {
+        do {
             begin.displayMenu();
             char answer = input.next().toLowerCase().charAt(0);
             input.nextLine();
@@ -43,17 +43,19 @@ public class AddressBookApplication {
                             System.out.println("Phone Number");
                             String phoneNumber = validateNonEmptyInput(input.nextLine());
 
-                            if (!begin.isContactExists(name, lastName)) {
-                                begin.CheckToAdd(name, lastName, street, city, state, zip, email, phoneNumber);
+                            if (!addressEntriesList.isContactExists(name, lastName)) {
+                                addressEntriesList.add(name, lastName, street, city, state, zip, email, phoneNumber);
                                 AddressEntry dataEntry = new AddressEntry(name, lastName, street, city, state, zip,
                                         email, phoneNumber);
-                                validEntry = false;
                             } else {
                                 System.out.println("Contact already exists");
                             }
+                            validEntry = false;
                         } catch (IllegalArgumentException e) {
                             System.out.println(e.getMessage());
                             System.out.println("Please enter a valid information");
+                        } catch (Exception e){
+                            System.out.println("An error occurred when adding the contact: ");
                         }
                     }
                     break;
@@ -105,7 +107,7 @@ public class AddressBookApplication {
 
             }
 
-        }
+        }while (running = true);
     }
 
     //Method to validate if a user input is empty

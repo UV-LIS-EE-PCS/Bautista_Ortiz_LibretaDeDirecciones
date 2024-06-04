@@ -23,18 +23,7 @@ public class Menu {
         System.out.println("------------------------------------");
     }
 
-    //Method to validate if a contact exists
-    public boolean isContactExists(String name, String lastName){
-        for (AddressEntry dataEntry : menu.getEntries()){
-            if (dataEntry.getName().equalsIgnoreCase(name) &&
-                    dataEntry.getLastName().equalsIgnoreCase(lastName)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void CheckToAdd (String name, String lastName, String street, String city,
+    /*public void CheckToAdd (String name, String lastName, String street, String city,
                             String state, int zip, String email, String phoneNumber) {
         try {
             if (!isContactExists(name, lastName)) {
@@ -46,7 +35,7 @@ public class Menu {
         } catch (Exception e) {
             System.out.println("An error occurred when adding the contact: " + e.getMessage());
         }
-    }
+    }*/
 
 }
 

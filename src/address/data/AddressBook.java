@@ -77,9 +77,18 @@ public class AddressBook {
                 index++;
             }
             AddressEntry dataEntry = createAddressEntry(addressElements);
-            addressEntriesList.add(dataEntry);
-            System.out.println("File: " + fileName + " load successfully");
-        } catch (Exception e){
+            if (!isContactExists(dataEntry.getName(), dataEntry.getLastName())){
+                addressEntriesList.add(dataEntry);
+                System.out.println("File: " + fileName + " load successfully");
+            }
+            else {
+                System.out.println("Duplicate entry found in file " + fileName);
+            }
+        } catch (FileNotFoundException e){
+            System.out.println("File: " + fileName + " not found");
+        }
+        catch (IOException e){
+            System.out.println("Error reading file: " + fileName);
             e.printStackTrace();
         }
     }
@@ -122,9 +131,14 @@ public class AddressBook {
         }
     }
 
-
-
-
-
+    public boolean isContactExists(String name, String lastName){
+        for (AddressEntry dataEntry : addressEntriesList){
+            if (dataEntry.getName().equalsIgnoreCase(name) &&
+                    dataEntry.getLastName().equalsIgnoreCase(lastName)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
