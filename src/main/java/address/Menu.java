@@ -38,7 +38,5 @@ public class Menu {
         }
         return input.trim();
     }
-
-
 }
 
