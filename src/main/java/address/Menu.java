@@ -9,7 +9,9 @@ public class Menu {
         this.menu = menu;
     }
 
-    //Method that displays the available options for manipulating the records
+    /**
+     * Displays the menu options for interacting with the address book.
+     */
     public void displayMenu(){
         System.out.println("------------------------------------");
         System.out.println("Welcome to the Menu \n" +
@@ -23,19 +25,20 @@ public class Menu {
         System.out.println("------------------------------------");
     }
 
-    /*public void CheckToAdd (String name, String lastName, String street, String city,
-                            String state, int zip, String email, String phoneNumber) {
-        try {
-            if (!isContactExists(name, lastName)) {
-                menu.add(name, lastName, street, city, state, zip, email, phoneNumber);
-                System.out.println("Contact added successfully!");
-            } else {
-                System.out.println("This contact already exists");
-            }
-        } catch (Exception e) {
-            System.out.println("An error occurred when adding the contact: " + e.getMessage());
+    /**
+     * Validates a non-empty input string.
+     * Throws an IllegalArgumentException if the input is null or empty after trimming.
+     * @param input The input string to validate.
+     * @return The trimmed input string if it is not empty.
+     * @throws IllegalArgumentException If the input string is null or empty after trimming.
+     */
+    static String validateNonEmptyInput(String input) {
+        if (input == null || input.trim().equals("")) {
+            throw new IllegalArgumentException("This field cannot be empty");
         }
-    }*/
+        return input.trim();
+    }
+
 
 }
 

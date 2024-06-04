@@ -2,8 +2,6 @@ package address;
 
 import address.data.*;
 
-import javax.xml.namespace.QName;
-import java.nio.channels.SelectableChannel;
 import java.util.Scanner;
 
 public class AddressBookApplication {
@@ -22,15 +20,15 @@ public class AddressBookApplication {
                     while (validEntry) {
                         try {
                             System.out.println("Name");
-                            String name = validateNonEmptyInput(input.nextLine());
+                            String name = begin.validateNonEmptyInput(input.nextLine());
                             System.out.println("Last Name");
-                            String lastName = validateNonEmptyInput(input.nextLine());
+                            String lastName = begin.validateNonEmptyInput(input.nextLine());
                             System.out.println("Street");
-                            String street = validateNonEmptyInput(input.nextLine());
+                            String street = begin.validateNonEmptyInput(input.nextLine());
                             System.out.println("City");
-                            String city = validateNonEmptyInput(input.nextLine());
+                            String city = begin.validateNonEmptyInput(input.nextLine());
                             System.out.println("State");
-                            String state = validateNonEmptyInput(input.nextLine());
+                            String state = begin.validateNonEmptyInput(input.nextLine());
                             System.out.println("Zip");
                             while (!input.hasNextInt()) {
                                 System.out.println("Invalid input \nEnter a nex zip");
@@ -39,9 +37,9 @@ public class AddressBookApplication {
                             int zip = input.nextInt();
                             input.nextLine();
                             System.out.println("Email");
-                            String email = validateNonEmptyInput(input.nextLine());
+                            String email = begin.validateNonEmptyInput(input.nextLine());
                             System.out.println("Phone Number");
-                            String phoneNumber = validateNonEmptyInput(input.nextLine());
+                            String phoneNumber = begin.validateNonEmptyInput(input.nextLine());
 
                             if (!addressEntriesList.isContactExists(name, lastName)) {
                                 addressEntriesList.add(name, lastName, street, city, state, zip, email, phoneNumber);
@@ -62,9 +60,9 @@ public class AddressBookApplication {
 
                 case 'b': //Remove
                     System.out.println("Enter the name of the contact of you want to remove");
-                    String nameContact = validateNonEmptyInput(input.nextLine());
+                    String nameContact = begin.validateNonEmptyInput(input.nextLine());
                     System.out.println("Enter the last name of the contact of you want to remove");
-                    String lastNameContact = validateNonEmptyInput(input.nextLine());
+                    String lastNameContact = begin.validateNonEmptyInput(input.nextLine());
                     addressEntriesList.find(lastNameContact);
 
                     System.out.println("Are you sure to remove this contact? (y/n)");
@@ -106,15 +104,8 @@ public class AddressBookApplication {
 
 
             }
-
-        }while (running = true);
+        }while (running);
     }
 
-    //Method to validate if a user input is empty
-    private static String validateNonEmptyInput(String input) {
-        if (input == null || input.trim().equals("")) {
-            throw new IllegalArgumentException("This field cannot be empty");
-        }
-        return input.trim();
-    }
+
 }

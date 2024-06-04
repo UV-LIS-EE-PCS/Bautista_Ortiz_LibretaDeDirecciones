@@ -1,4 +1,4 @@
-package tests;
+package address;
 
 public class MenuTest {
 }
