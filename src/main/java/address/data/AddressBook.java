@@ -74,12 +74,10 @@ public class AddressBook {
     /**
      * Removes an AddressEntry from the address book that matches the given first name and last name.
      *
-     * @param name     the first name of the contact to be removed
      * @param lastName the last name of the contact to be removed
      */
-    public void remove(String name, String lastName ){
-        addressEntriesList.removeIf(entry -> entry.getLastName().equals(lastName)
-                && entry.getName().equals(name));
+    public void remove(String lastName ){
+        addressEntriesList.removeIf(entry -> entry.getLastName().equalsIgnoreCase(lastName));
         System.out.println(lastName + " Removed successfully");
     }
 

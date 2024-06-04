@@ -59,8 +59,6 @@ public class AddressBookApplication {
                     break;
 
                 case 'b': //Remove
-                    System.out.println("Enter the name of the contact of you want to remove");
-                    String nameContact = begin.validateNonEmptyInput(input.nextLine());
                     System.out.println("Enter the last name of the contact of you want to remove");
                     String lastNameContact = begin.validateNonEmptyInput(input.nextLine());
                     addressEntriesList.find(lastNameContact);
@@ -68,7 +66,7 @@ public class AddressBookApplication {
                     System.out.println("Are you sure to remove this contact? (y/n)");
                     char answerToCase = input.nextLine().toLowerCase().charAt(0);
                     if (answerToCase == 'y'){
-                        addressEntriesList.remove(nameContact, lastNameContact);
+                        addressEntriesList.remove(lastNameContact);
                     } else if (answerToCase == 'n') {
                         System.out.println("Operation canceled");
 
@@ -99,10 +97,6 @@ public class AddressBookApplication {
                 default:
                     System.out.println("Invalid entry, must be a letter from a - f");
                     break;
-
-
-
-
             }
         }while (running);
     }

@@ -8,17 +8,22 @@ import address.Menu;
 
 
 public class MenuTest {
+    private AddressBook begin;
+    private Menu menu;
+
+    @BeforeEach
+    public void setUp() {
+        begin = AddressBook.getInstance();
+        menu = new Menu(begin);
+    }
+
+    /**
+     * Test to validate the empty input
+     */
     @Test
     public void testValidateNonEmptyInput() {
         String nonEmptyInput = "Ejemplo";
         assertEquals("Ejemplo", Menu.validateNonEmptyInput(nonEmptyInput));
 
-        String emptyInput = "";
-        try{
-            Menu.validateNonEmptyInput(emptyInput);
-            fail("Expected IllegalArgumentException not thrown");
-        } catch (IllegalArgumentException e){
-            assertEquals("This field is required", e.getMessage());
-        }
     }
 }

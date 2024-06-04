@@ -17,7 +17,6 @@ public class AddressEntry {
      * Constructs an empty AddressEntry.
      */
     public AddressEntry(){
-
     }
 
     /**
@@ -33,7 +32,14 @@ public class AddressEntry {
      */
     public AddressEntry(String name, String lastName, String street, String city, String state, int zip,
                         String email, String phoneNumber){
-
+        this.name = name;
+        this.lastName = lastName;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
     /**
