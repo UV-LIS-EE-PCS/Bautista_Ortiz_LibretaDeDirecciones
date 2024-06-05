@@ -45,6 +45,7 @@ public class AddressBookApplication {
                                 addressEntriesList.add(name, lastName, street, city, state, zip, email, phoneNumber);
                                 AddressEntry dataEntry = new AddressEntry(name, lastName, street, city, state, zip,
                                         email, phoneNumber);
+                                System.out.println("Contact added");
                             } else {
                                 System.out.println("Contact already exists");
                             }

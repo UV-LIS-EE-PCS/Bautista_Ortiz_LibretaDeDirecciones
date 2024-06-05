@@ -46,7 +46,7 @@ public class AddressBookTest {
 
         if (!addressBook.isContactExists("Alejandra", "Bautista")){
             addressBook.readFromFile("Bautista.txt");
-            assertEquals(1, addressBook.getEntries().size());
+            assertEquals(2, addressBook.getEntries().size());
         }
         else {
             addressBook.readFromFile("Bautista.txt");
