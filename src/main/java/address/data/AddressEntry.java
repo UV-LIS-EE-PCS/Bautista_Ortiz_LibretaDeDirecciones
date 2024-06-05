@@ -179,7 +179,7 @@ public class AddressEntry {
         return "Name: " + getName() + "\n"+ "Last Name: " + getLastName() + "\n"+
                 "Street: " + getStreet() + "\n"+ "City: " + getCity() + "\n"+
                 "State: " + getState() + "\n"+ "Zip: " + getZip() + "\n"+
-                "Email: " + getEmail() + "\n"+ "PhoneNumber: " + getPhoneNumber();
+                "Email: " + getEmail() + "\n"+ "PhoneNumber: " + getPhoneNumber() + "\n";
     }
 
 }

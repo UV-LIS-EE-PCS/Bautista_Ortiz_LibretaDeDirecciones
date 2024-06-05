@@ -82,56 +82,42 @@ public class AddressBook {
     }
 
     /**
-     * Creates an AddressEntry object from an array of address elements.
-     *
-     * @param addressElements an array of Strings containing the address elements
-     *                        in the following order: name, last name, street, city,
-     *                        state, zip, email, and phone number.
-     * @return an AddressEntry object populated with the provided address elements.
-     * @throws NumberFormatException if the zip code element cannot be parsed as an integer.
-     */
-    private AddressEntry createAddressEntry(String [] addressElements){
-        AddressEntry dataEntry = new AddressEntry();
-        dataEntry.setName(addressElements[0]);
-        dataEntry.setLastName(addressElements[1]);
-        dataEntry.setStreet(addressElements[2]);
-        dataEntry.setCity(addressElements[3]);
-        dataEntry.setState(addressElements[4]);
-        dataEntry.setZip(Integer.parseInt(addressElements[5]));
-        dataEntry.setEmail(addressElements[6]);
-        dataEntry.setPhoneNumber(addressElements[7]);
-        return dataEntry;
-    }
-
-    /**
      * Reads address entries from a file and adds them to the address book.
      * If a duplicate entry is found, it will not be added.
      *
-     * @param fileName the name of the file to read from.
+     * @param filename the name of the file to read from.
      */
-    public void readFromFile(String fileName){
-        try(BufferedReader entry = new BufferedReader(new FileReader(fileName))){
-            String [] addressElements = new String[8];
+    public void readFromFile(String filename) {
+        boolean hasDuplicates = false;
+        try (BufferedReader loadEntry = new BufferedReader(new FileReader(filename))) {
+            String[] addressElements = new String[8];
             int index = 0;
-            String currentLine;
-            while ((currentLine = entry.readLine()) != null){
-                String [] position = currentLine.split("\n");
-                addressElements[index] = position[0];
+            String line;
+            while ((line = loadEntry.readLine()) != null) {
+                addressElements[index] = line.trim();
                 index++;
+                if (index == 8) {
+                    String name = addressElements[0];
+                    String lastName = addressElements[1];
+
+                    if (!isContactExists(name, lastName)) {
+                        add(name, lastName, addressElements[2], addressElements[3], addressElements[4],
+                                Integer.parseInt(addressElements[5]), addressElements[6], addressElements[7]);
+                        System.out.println("Entry added: " + name + " " + lastName);
+                    } else {
+                        System.out.println("Duplicate entry found: " + name + " " + lastName);
+                        hasDuplicates = true;
+                    }
+
+                    index = 0;
+                }
             }
-            AddressEntry dataEntry = createAddressEntry(addressElements);
-            if (!isContactExists(dataEntry.getName(), dataEntry.getLastName())){
-                addressEntriesList.add(dataEntry);
-                System.out.println("File: " + fileName + " load successfully");
+            if (hasDuplicates) {
+                System.out.println("File " + filename + " not loaded");
+            } else {
+                System.out.println("File " + filename + " loaded successfully");
             }
-            else {
-                System.out.println("Duplicate entry found in file " + fileName);
-            }
-        } catch (FileNotFoundException e){
-            System.out.println("File: " + fileName + " not found");
-        }
-        catch (IOException e){
-            System.out.println("Error reading file: " + fileName);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

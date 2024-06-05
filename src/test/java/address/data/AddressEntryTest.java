@@ -56,7 +56,7 @@ public class AddressEntryTest {
         AddressEntry entry = new AddressEntry("Alejandra", "Ortiz", "Tulipanes", "Minatitlán",
                 "Veracruz", 96870, "bautista@gmail.com", "9221859943");
         assertEquals("Name: Alejandra\nLast Name: Ortiz\nStreet: Tulipanes\nCity: Minatitlán\nState: Veracruz" +
-                "\nZip: 96870\nEmail: bautista@gmail.com\nPhoneNumber: 9221859943", entry.toString());
+                "\nZip: 96870\nEmail: bautista@gmail.com\nPhoneNumber: 9221859943\n", entry.toString());
 
 
     }
